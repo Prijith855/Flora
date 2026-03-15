@@ -3998,8 +3998,8 @@ def history_page():
         
         Please set your Supabase credentials in `.streamlit/secrets.toml`:
         ```
-        SUPABASE_DETECTIONS_URL = "https://your-project.supabase.co"
-        SUPABASE_DETECTIONS_KEY = "your-anon-or-service-key"
+        SUPABASE_DETECTIONS_URL = st.secrets["https://your-project.supabase.co"]
+        SUPABASE_DETECTIONS_KEY = st.secrets["your-anon-or-service-key"]
         ```
         """)
         return
