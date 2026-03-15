@@ -2336,41 +2336,6 @@ def detection_page():
     if not st.session_state.detection_in_progress:
         load_css()
         navigation_sidebar()
-
-# ========================================
-# FAKE DETECTION (NO MODEL REQUIRED)
-# ========================================
-
-cls_name = random.choice(DISEASE_CLASSES)
-
-display_conf = random.uniform(0.78, 0.96)
-
-h, w, _ = img_np.shape
-x1, y1 = int(w * 0.2), int(h * 0.2)
-x2, y2 = int(w * 0.8), int(h * 0.8)
-
-# Get species from mapping
-species_name, species_conf = get_species_from_disease(cls_name)
-
-# Draw box
-cv2.rectangle(img_np, (x1, y1), (x2, y2), (255, 92, 138), 4)
-
-label_text = f"{cls_name} ({display_conf:.0%})"
-
-(text_w, text_h), _ = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)
-
-cv2.rectangle(img_np, (x1, y1 - text_h - 15), (x1 + text_w + 10, y1), (255, 92, 138), -1)
-
-cv2.putText(img_np, label_text, (x1 + 5, y1 - 5),
-           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
-
-st.session_state.detection_done = True
-st.session_state.result_image = img_np
-st.session_state.cls_name = cls_name
-st.session_state.display_conf = display_conf
-st.session_state.species_name = species_name
-st.session_state.species_confidence = species_conf
-st.session_state.save_to_history = True
     
     # ========================================
     # DISEASE TO SPECIES MAPPING FUNCTION
