@@ -2332,35 +2332,18 @@ import streamlit as st
 # Allow YOLO model class for PyTorch 2.6+
 torch.serialization.add_safe_globals([DetectionModel])
 
-# ===============================
-# DETECTION PAGE
-# ===============================
+import streamlit as st
 import torch
 from ultralytics import YOLO
+from torch.nn.modules.container import Sequential
 from ultralytics.nn.tasks import DetectionModel
-import streamlit as st
 
-# Allow YOLO model class for PyTorch 2.6+
-torch.serialization.add_safe_globals([DetectionModel])
+torch.serialization.add_safe_globals([Sequential, DetectionModel])
 
-# ===============================
-# DETECTION PAGE
-# ===============================
-def detection_page():
+MODEL_PATH = "best.pt"
 
-    # Prevent double navigation during detection
-    if 'detection_in_progress' not in st.session_state:
-        st.session_state.detection_in_progress = False
-
-    # Show navigation only when not processing
-    if not st.session_state.detection_in_progress:
-        load_css()
-        navigation_sidebar()
-
-    MODEL_PATH = "best.pt"
-
-    try:
-        model = YOLO(MODEL_PATH)
+try:
+    model = YOLO(MODEL_PATH)
     except Exception as e:
         st.error(f"Error loading model: {e}")
         st.warning("Please ensure 'best.pt' model file is in the same directory")
