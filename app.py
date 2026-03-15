@@ -2342,9 +2342,9 @@ torch.serialization.add_safe_globals([Sequential, DetectionModel])
 
 MODEL_PATH = "best.pt"
 
- try:
+try:
     model = YOLO(MODEL_PATH)
-   except Exception as e:
+except Exception as e:
         st.error(f"Error loading model: {e}")
         st.warning("Please ensure 'best.pt' model file is in the same directory")
         return
