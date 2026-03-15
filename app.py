@@ -2327,6 +2327,17 @@ def about_page():
             </div>
         </div>
         """, unsafe_allow_html=True)
+
+    def detection_page():
+    # FIX: Check if we're in the middle of a detection process to prevent double nav flash
+    if 'detection_in_progress' not in st.session_state:
+        st.session_state.detection_in_progress = False
+    
+    # Only show navigation if not in the middle of processing
+    if not st.session_state.detection_in_progress:
+        load_css()
+        navigation_sidebar()
+        
     import torch
     from ultralytics import YOLO
     from ultralytics.nn.tasks import DetectionModel
