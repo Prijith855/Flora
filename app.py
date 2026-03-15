@@ -2335,6 +2335,17 @@ torch.serialization.add_safe_globals([DetectionModel])
 # ===============================
 # DETECTION PAGE
 # ===============================
+import torch
+from ultralytics import YOLO
+from ultralytics.nn.tasks import DetectionModel
+import streamlit as st
+
+# Allow YOLO model class for PyTorch 2.6+
+torch.serialization.add_safe_globals([DetectionModel])
+
+# ===============================
+# DETECTION PAGE
+# ===============================
 def detection_page():
 
     # Prevent double navigation during detection
