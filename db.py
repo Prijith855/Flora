@@ -2,8 +2,8 @@ import streamlit as st
 from supabase import create_client
 from hashlib import sha256
 
-SUPABASE_URL = st.secrets["https://foomskaniqyvqwkcdqtw.supabase.co"]
-SUPABASE_KEY = st.secrets["sb_publishable_VsJubo4JE1plSBsYQIV2xg_m2qTdu81"]
+SUPABASE_URL = st.secrets["SUPABASE_URL"]
+SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
 
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
