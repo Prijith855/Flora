@@ -11,6 +11,9 @@ import time
 import plotly.graph_objects as go
 import plotly.express as px
 import hashlib
+import torch
+from ultralytics.nn.tasks import DetectionModel
+from torch.nn.modules.container import Sequential
 
 # Initialize session states
 if 'page' not in st.session_state:
