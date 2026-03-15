@@ -2336,6 +2336,13 @@ def detection_page():
     if not st.session_state.detection_in_progress:
         load_css()
         navigation_sidebar()
+        
+import torch
+from ultralytics import YOLO
+from ultralytics.nn.tasks import DetectionModel
+
+# allow YOLO model class
+torch.serialization.add_safe_globals([DetectionModel])
     
     MODEL_PATH = r"best.pt"
     try:
