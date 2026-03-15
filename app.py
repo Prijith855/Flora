@@ -2324,32 +2324,32 @@ def about_page():
             </div>
         </div>
         """, unsafe_allow_html=True)
-import torch
-from ultralytics import YOLO
-from ultralytics.nn.tasks import DetectionModel
-import streamlit as st
+    import torch
+    from ultralytics import YOLO
+    from ultralytics.nn.tasks import DetectionModel
+    import streamlit as st
 
-# Allow YOLO model class for PyTorch 2.6+
-torch.serialization.add_safe_globals([DetectionModel])
+    # Allow YOLO model class for PyTorch 2.6+
+    torch.serialization.add_safe_globals([DetectionModel])
 
-import streamlit as st
-import torch
-from ultralytics import YOLO
-from torch.nn.modules.container import Sequential
-from ultralytics.nn.tasks import DetectionModel
+    import streamlit as st
+    import torch
+    from ultralytics import YOLO
+    from torch.nn.modules.container import Sequential
+    from ultralytics.nn.tasks import DetectionModel
 
-torch.serialization.add_safe_globals([Sequential, DetectionModel])
+    torch.serialization.add_safe_globals([Sequential, DetectionModel])
 
-MODEL_PATH = "best.pt"
+    MODEL_PATH = "best.pt"
 
-try:
-    model = YOLO(MODEL_PATH)
-except Exception as e:
-    st.error(f"Error loading model: {e}")
-    st.warning("Please ensure 'best.pt' model file is in the same directory")
-    return
+    try:
+        model = YOLO(MODEL_PATH)
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        st.warning("Please ensure 'best.pt' model file is in the same directory")
+        return
 
-FLOWER_MODEL_PATH = "flower_classifier.pt"
+    FLOWER_MODEL_PATH = "flower_classifier.pt"
     # ========================================
     # DISEASE TO SPECIES MAPPING FUNCTION
     # ========================================
