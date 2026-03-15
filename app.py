@@ -2338,18 +2338,18 @@ from ultralytics import YOLO
 from torch.nn.modules.container import Sequential
 from ultralytics.nn.tasks import DetectionModel
 
- torch.serialization.add_safe_globals([Sequential, DetectionModel])
+torch.serialization.add_safe_globals([Sequential, DetectionModel])
 
- MODEL_PATH = "best.pt"
+MODEL_PATH = "best.pt"
 
- try:
+try:
     model = YOLO(MODEL_PATH)
- except Exception as e:
-        st.error(f"Error loading model: {e}")
-        st.warning("Please ensure 'best.pt' model file is in the same directory")
-        return
+except Exception as e:
+    st.error(f"Error loading model: {e}")
+    st.warning("Please ensure 'best.pt' model file is in the same directory")
+    return
 
- FLOWER_MODEL_PATH = "flower_classifier.pt"
+FLOWER_MODEL_PATH = "flower_classifier.pt"
     # ========================================
     # DISEASE TO SPECIES MAPPING FUNCTION
     # ========================================
