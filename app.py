@@ -2324,36 +2324,38 @@ def about_page():
             </div>
         </div>
         """, unsafe_allow_html=True)
+import torch
+from ultralytics import YOLO
+from ultralytics.nn.tasks import DetectionModel
+import streamlit as st
+
+# Allow YOLO model class for PyTorch 2.6+
+torch.serialization.add_safe_globals([DetectionModel])
+
 # ===============================
 # DETECTION PAGE
 # ===============================
 def detection_page():
-    # FIX: Check if we're in the middle of a detection process to prevent double nav flash
+
+    # Prevent double navigation during detection
     if 'detection_in_progress' not in st.session_state:
         st.session_state.detection_in_progress = False
-    
-    # Only show navigation if not in the middle of processing
+
+    # Show navigation only when not processing
     if not st.session_state.detection_in_progress:
         load_css()
         navigation_sidebar()
-        
-import torch
-from ultralytics import YOLO
-from ultralytics.nn.tasks import DetectionModel
 
-# allow YOLO model class
-torch.serialization.add_safe_globals([DetectionModel])
-    
-    MODEL_PATH = r"best.pt"
+    MODEL_PATH = "best.pt"
+
     try:
         model = YOLO(MODEL_PATH)
     except Exception as e:
         st.error(f"Error loading model: {e}")
         st.warning("Please ensure 'best.pt' model file is in the same directory")
         return
-    
-    FLOWER_MODEL_PATH = r"flower_classifier.pt"
-    
+
+    FLOWER_MODEL_PATH = "flower_classifier.pt"
     # ========================================
     # DISEASE TO SPECIES MAPPING FUNCTION
     # ========================================
