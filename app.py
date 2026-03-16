@@ -2330,19 +2330,6 @@ def about_page():
     load_css()
     navigation_sidebar()
     
-    MODEL_PATH = r"best.pt"
-    try:
-        model = YOLO(MODEL_PATH)
-    except Exception as e:
-        st.error(f"Error loading model: {e}")
-        st.warning("Please ensure 'best.pt' model file is in the same directory")
-        return
-    
-    # Load a general image classification model for flower validation (using ResNet or similar)
-    # You can use a pre-trained model or a simple flower classifier
-    FLOWER_MODEL_PATH = r"flower_classifier.pt"  # Optional: dedicated flower classifier
-    
-    
     # ========================================
     # DISEASE TO SPECIES MAPPING FUNCTION
     # ========================================
