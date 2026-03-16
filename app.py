@@ -2326,7 +2326,10 @@ def about_page():
             </div>
         </div>
         """, unsafe_allow_html=True)
-
+import torch
+import ultralytics.nn.tasks
+torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])
+from ultralytics import YOLO
 def detection_page():
     load_css()
     navigation_sidebar()
