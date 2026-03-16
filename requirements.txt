@@ -1,9 +1,9 @@
-streamlit>=1.41.0  # Must be recent for 3.14 support
-ultralytics>=8.3.0  # Newer version with 3.14 support
-opencv-python-headless>=4.11.0  # NumPy 2.x compatible
-numpy>=2.3.0  # CRITICAL: <2.3 is broken on 3.14
-pillow>=11.0.0  # Python 3.14 support added
-torch>=2.5.0  # 2.4 may not work on 3.14
-torchvision>=0.20.0
+streamlit
+ultralytics==8.2.0
+opencv-python-headless>=4.8.0
+numpy
+pillow
+torch>=2.0.0,<2.6.0
+torchvision
 plotly
 supabase
