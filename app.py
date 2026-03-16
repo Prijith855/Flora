@@ -2326,33 +2326,21 @@ def about_page():
             </div>
         </div>
         """, unsafe_allow_html=True)
-import torch
-import ultralytics.nn.tasks
-torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])
-from ultralytics import YOLO
-def detection_page():
+ def detection_page():
     load_css()
     navigation_sidebar()
     
-    MODEL_PATH = "best.pt"  # Remove 'r' prefix, not needed
-    
-    @st.cache_resource  # Cache to avoid reloading on every interaction
-    def load_model():
-        return YOLO(MODEL_PATH)
-    
+    MODEL_PATH = r"best.pt"
     try:
-        model = load_model()
+        model = YOLO(MODEL_PATH)
     except Exception as e:
         st.error(f"Error loading model: {e}")
-        st.warning("Please ensure 'best.pt' is in the repo root")
+        st.warning("Please ensure 'best.pt' model file is in the same directory")
         return
     
-    # Pass model to run_detection
-    run_detection(model)  # <-- Pass it here
-
-def run_detection(model):  # <-- Accept it here
-    # Now you can use model
-    results = model(tmp.name, conf=0.3)
+    # Load a general image classification model for flower validation (using ResNet or similar)
+    # You can use a pre-trained model or a simple flower classifier
+    FLOWER_MODEL_PATH = r"flower_classifier.pt"  # Optional: dedicated flower classifier
     
     
     # ========================================
