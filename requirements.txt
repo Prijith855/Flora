@@ -7,3 +7,6 @@ torch
 torchvision
 plotly
 supabase
+torch>=2.0.0,<2.6.0
+ultralytics>=8.0.0
+opencv-python-headless>=4.8.0
