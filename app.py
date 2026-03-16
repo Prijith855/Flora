@@ -978,9 +978,8 @@ def login_page():
                                 label_visibility="collapsed")
         
         st.markdown('<label class="cute-label">🔒 Password</label>', unsafe_allow_html=True)
-        password = st.text_input("", type="password", placeholder="Enter your password 🔮", key="login_pass", 
-                                label_visibility="collapsed")
-        
+        # ✅ Fixed - add label and hide it
+        password = st.text_input("Password", type="password", placeholder="Enter your password 🔮", key="login_pass", label_visibility="collapsed")
         col_forgot, col_space = st.columns([1, 1])
         with col_forgot:
             if st.button("🔑 Forgot Password?", key="forgot_pass"):
