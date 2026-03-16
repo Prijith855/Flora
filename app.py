@@ -2327,15 +2327,31 @@ def about_page():
             </div>
         </div>
         """, unsafe_allow_html=True)
+
 def detection_page():
-    # FIX: Check if we're in the middle of a detection process to prevent double nav flash
-    if 'detection_in_progress' not in st.session_state:
-        st.session_state.detection_in_progress = False
+    load_css()
+    navigation_sidebar()
     
-    # Only show navigation if not in the middle of processing
-    if not st.session_state.detection_in_progress:
-        load_css()
-        navigation_sidebar()
+    MODEL_PATH = "best.pt"  # Remove 'r' prefix, not needed
+    
+    @st.cache_resource  # Cache to avoid reloading on every interaction
+    def load_model():
+        return YOLO(MODEL_PATH)
+    
+    try:
+        model = load_model()
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        st.warning("Please ensure 'best.pt' is in the repo root")
+        return
+    
+    # Pass model to run_detection
+    run_detection(model)  # <-- Pass it here
+
+def run_detection(model):  # <-- Accept it here
+    # Now you can use model
+    results = model(tmp.name, conf=0.3)
+    
     
     # ========================================
     # DISEASE TO SPECIES MAPPING FUNCTION
